@@ -129,12 +129,50 @@ export default function AdminStudentsPage() {
         }).filter(s => s.first_name || s.last_name);
 
         if (formattedData.length > 0) {
-          const { error } = await supabase.from('students').insert(formattedData);
-          if (error) {
-            alert("Xatolik yuz berdi: " + error.message);
+          // 1. CSV ichidagi dublikatlarni tozalash (ismi va familiyasi bir xil bo'lganlarni oxirgisini saqlab qolish)
+          const uniqueCsvData: typeof formattedData = [];
+          const seenNamesInCsv = new Set<string>();
+          
+          for (let i = formattedData.length - 1; i >= 0; i--) {
+            const student = formattedData[i];
+            const nameKey = `${student.first_name.trim().toLowerCase()}_${student.last_name.trim().toLowerCase()}`;
+            if (!seenNamesInCsv.has(nameKey)) {
+              seenNamesInCsv.add(nameKey);
+              uniqueCsvData.unshift(student);
+            }
+          }
+
+          // 2. Ma'lumotlar bazasida allaqachon bor bo'lgan talabalarni aniqlash
+          const { data: existingStudents, error: fetchError } = await supabase
+            .from('students')
+            .select('first_name, last_name');
+
+          let finalInsertData = uniqueCsvData;
+
+          if (!fetchError && existingStudents) {
+            const existingNamesSet = new Set(
+              existingStudents.map(s => `${s.first_name.trim().toLowerCase()}_${s.last_name.trim().toLowerCase()}`)
+            );
+            
+            // Faqat bazada bo'lmagan yangi talabalarni saralab olish
+            finalInsertData = uniqueCsvData.filter(student => {
+              const nameKey = `${student.first_name.trim().toLowerCase()}_${student.last_name.trim().toLowerCase()}`;
+              return !existingNamesSet.has(nameKey);
+            });
+          }
+
+          if (finalInsertData.length > 0) {
+            const { error } = await supabase.from('students').insert(finalInsertData);
+            if (error) {
+              alert("Xatolik yuz berdi: " + error.message);
+            } else {
+              const skippedCount = uniqueCsvData.length - finalInsertData.length;
+              const skippedMsg = skippedCount > 0 ? ` (${skippedCount} ta mavjud talaba yuklanmadi)` : '';
+              alert(`Muvaffaqiyatli ${finalInsertData.length} ta yangi talaba qo'shildi!${skippedMsg}`);
+              fetchStudents();
+            }
           } else {
-            alert(`Muvaffaqiyatli ${formattedData.length} ta talaba qo'shildi!`);
-            fetchStudents();
+            alert("Barcha talabalar bazada allaqachon mavjud. Yangi talaba topilmadi.");
           }
         } else {
           alert("Fayl ichida yaroqli ma'lumot topilmadi.");
