@@ -44,8 +44,8 @@ export default function AdminSettingsPage() {
 
   return (
     <div className="max-w-xl">
-      <h1 className="text-3xl font-bold text-slate-800 mb-2">Sayt Sozlamalari</h1>
-      <p className="text-slate-500 mb-8">
+      <h1 className="text-3xl font-black text-slate-800 dark:text-white mb-2">Sayt Sozlamalari</h1>
+      <p className="text-slate-500 dark:text-slate-400 mb-8 text-sm">
         Bu yerdan "Vaqtimiz" sahifasidagi bitiruv taymerini sozlashingiz mumkin.
       </p>
 
@@ -54,27 +54,27 @@ export default function AdminSettingsPage() {
           <Loader2 className="w-8 h-8 animate-spin text-violet-500" />
         </div>
       ) : (
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 space-y-6">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 p-6 space-y-6">
 
           {/* Bitiruv sanasi */}
           <div>
-            <label className="block text-sm font-bold text-slate-700 mb-2">
+            <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
               🎓 Bitiruv Sanasi va Vaqti
             </label>
-            <p className="text-xs text-slate-400 mb-3">
+            <p className="text-xs text-slate-400 dark:text-slate-550 mb-3">
               "Vaqtimiz" sahifasidagi taymer shu sanadan boshlab o'tgan vaqtni (Yil, Oy, Kun, Soat, Daqiqa, Soniya) sanab turadi.
             </p>
             <input
               type="datetime-local"
               value={graduationDate}
               onChange={(e) => setGraduationDate(e.target.value)}
-              className="w-full border border-slate-300 rounded-xl px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-violet-500 text-sm"
+              className="w-full border border-slate-300 dark:border-slate-800 rounded-xl px-4 py-3 bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-violet-500 text-sm"
             />
           </div>
 
           {/* Hozirgi sana ko'rsatgich */}
           {graduationDate && (
-            <div className="bg-violet-50 border border-violet-200 rounded-xl px-4 py-3 text-sm text-violet-700">
+            <div className="bg-violet-50 dark:bg-violet-950/20 border border-violet-200 dark:border-violet-900/30 rounded-xl px-4 py-3 text-sm text-violet-750 dark:text-violet-400">
               <span className="font-semibold">Tanlangan sana:</span>{" "}
               {new Date(graduationDate).toLocaleString("uz-UZ", {
                 year: "numeric",

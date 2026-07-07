@@ -150,7 +150,7 @@ export default function AdminStudentsPage() {
   return (
     <div>
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
-        <h1 className="text-3xl font-bold text-slate-800">Talabalarni Boshqarish</h1>
+        <h1 className="text-3xl font-black text-slate-800 dark:text-white">Talabalarni Boshqarish</h1>
         <div className="flex items-center gap-3">
           <input 
             type="file" 
@@ -161,12 +161,15 @@ export default function AdminStudentsPage() {
           />
           <button 
             onClick={() => fileInputRef.current?.click()} 
-            className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+            className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2.5 rounded-xl font-bold transition-all shadow-md active:scale-95"
           >
             <UploadCloud className="w-5 h-5" />
             CSV dan Yuklash
           </button>
-          <button onClick={openAddModal} className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+          <button 
+            onClick={openAddModal} 
+            className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-650 hover:opacity-95 text-white px-4 py-2.5 rounded-xl font-bold transition-all shadow-md active:scale-95"
+          >
             <Plus className="w-5 h-5" />
             Yangi talaba
           </button>
@@ -178,46 +181,46 @@ export default function AdminStudentsPage() {
           <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
         </div>
       ) : (
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-x-auto">
-          <table className="w-full text-left">
-            <thead className="bg-slate-50 border-b border-slate-200 text-slate-500 font-medium text-sm">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800/80 overflow-x-auto">
+          <table className="w-full text-left min-w-[700px]">
+            <thead className="bg-slate-50 dark:bg-slate-800/40 border-b border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 font-bold text-xs uppercase tracking-wider">
               <tr>
-                <th className="p-4">Rasm</th>
+                <th className="p-4 w-20">Rasm</th>
                 <th className="p-4">F.I.O</th>
                 <th className="p-4">Telefon</th>
                 <th className="p-4">Manzil</th>
-                <th className="p-4 text-right">Amallar</th>
+                <th className="p-4 text-right w-28">Amallar</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
               {students.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="p-8 text-center text-slate-500">
+                  <td colSpan={5} className="p-8 text-center text-slate-500 dark:text-slate-400 font-medium">
                     Hali talabalar qo'shilmagan
                   </td>
                 </tr>
               ) : students.map((s) => (
-                <tr key={s.id} className="hover:bg-slate-50 transition-colors">
+                <tr key={s.id} className="hover:bg-slate-50 dark:hover:bg-slate-850/40 transition-colors">
                   <td className="p-4">
-                    <div className="w-12 h-12 rounded-full bg-slate-200 overflow-hidden relative border border-slate-300">
+                    <div className="w-12 h-12 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden relative border border-slate-350 dark:border-slate-700 shadow-inner">
                       {s.photo_url ? (
-                        <img src={s.photo_url.includes('drive.google.com') ? `/api/proxy-image?url=${encodeURIComponent(s.photo_url)}` : s.photo_url} alt={s.first_name} className="w-full h-full object-cover" />
+                        <img src={s.photo_url.includes('drive.google.com') ? `/api/proxy-image?url=${encodeURIComponent(s.photo_url)}` : s.photo_url} alt={s.first_name} className="w-full h-full object-cover animate-in fade-in duration-300" />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center text-slate-400 font-bold text-sm">
+                        <div className="w-full h-full flex items-center justify-center text-slate-400 dark:text-slate-500 font-bold text-sm">
                           {s.first_name[0]}{s.last_name[0]}
                         </div>
                       )}
                     </div>
                   </td>
-                  <td className="p-4 font-medium text-slate-800">{s.last_name} {s.first_name}</td>
-                  <td className="p-4 text-slate-600">{s.phone_number || '-'}</td>
-                  <td className="p-4 text-slate-600 truncate max-w-[200px]">{s.address || '-'}</td>
+                  <td className="p-4 font-bold text-slate-800 dark:text-slate-200 text-sm">{s.last_name} {s.first_name}</td>
+                  <td className="p-4 text-slate-600 dark:text-slate-400 text-sm font-medium">{s.phone_number || '-'}</td>
+                  <td className="p-4 text-slate-600 dark:text-slate-400 text-sm max-w-[250px] truncate" title={s.address || undefined}>{s.address || '-'}</td>
                   <td className="p-4 text-right">
-                    <div className="flex items-center justify-end gap-2">
-                      <button onClick={() => openEditModal(s)} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                    <div className="flex items-center justify-end gap-1">
+                      <button onClick={() => openEditModal(s)} className="p-2 text-blue-600 hover:bg-blue-50 dark:text-blue-450 dark:hover:bg-blue-950/40 rounded-xl transition-all" title="Tahrirlash">
                         <Edit2 className="w-4 h-4" />
                       </button>
-                      <button onClick={() => handleDelete(s.id, s.photo_url)} className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                      <button onClick={() => handleDelete(s.id, s.photo_url)} className="p-2 text-red-650 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/40 rounded-xl transition-all" title="O'chirish">
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>

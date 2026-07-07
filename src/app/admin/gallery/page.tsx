@@ -123,8 +123,11 @@ export default function AdminGalleryPage() {
   return (
     <div>
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-slate-800">Galereyani Boshqarish</h1>
-        <button onClick={() => setIsModalOpen(true)} className="flex items-center gap-2 bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+        <h1 className="text-3xl font-black text-slate-800 dark:text-white">Galereyani Boshqarish</h1>
+        <button 
+          onClick={() => setIsModalOpen(true)} 
+          className="flex items-center gap-2 bg-pink-650 hover:bg-pink-700 text-white px-4 py-2.5 rounded-xl font-bold transition-all shadow-md active:scale-95"
+        >
           <Plus className="w-5 h-5" />
           Yangi qo'shish
         </button>
@@ -132,17 +135,17 @@ export default function AdminGalleryPage() {
 
       {loading ? (
         <div className="flex justify-center p-12">
-          <Loader2 className="w-8 h-8 animate-spin text-pink-600" />
+          <Loader2 className="w-8 h-8 animate-spin text-pink-650 dark:text-pink-400" />
         </div>
       ) : (
         <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
           {items.map((item) => (
-            <div key={item.id} className="break-inside-avoid bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden group relative">
-              <div className="relative w-full bg-slate-100 flex items-center justify-center overflow-hidden">
+            <div key={item.id} className="break-inside-avoid bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800/80 overflow-hidden group relative">
+              <div className="relative w-full bg-slate-100 dark:bg-slate-950 flex items-center justify-center overflow-hidden">
                 {item.media_type === 'google_photos' ? (
-                  <div className="w-full aspect-video bg-gradient-to-br from-blue-100 to-green-100 flex flex-col items-center justify-center p-6 text-center">
-                    <ImageIcon className="w-12 h-12 mb-3 text-blue-500 drop-shadow-sm" />
-                    <span className="font-semibold text-slate-700 text-sm">Google Photos Albom</span>
+                  <div className="w-full aspect-video bg-gradient-to-br from-blue-100/60 to-green-100/60 dark:from-blue-950/20 dark:to-green-950/20 flex flex-col items-center justify-center p-6 text-center">
+                    <ImageIcon className="w-12 h-12 mb-3 text-blue-500 dark:text-blue-450 drop-shadow-sm" />
+                    <span className="font-bold text-slate-700 dark:text-slate-350 text-sm">Google Photos Albom</span>
                   </div>
                 ) : item.media_type === 'google_photos_photo' ? (
                   <div className="relative w-full h-auto bg-slate-900 group">
@@ -152,7 +155,7 @@ export default function AdminGalleryPage() {
                       className="w-full h-auto max-h-[70vh] object-contain" 
                     />
                     <div className="absolute top-2 left-2 opacity-100 z-10 pointer-events-none">
-                      <span className="bg-white/90 backdrop-blur-md text-pink-600 text-xs font-bold px-2 py-1 rounded flex items-center gap-1 shadow-sm border border-white/20">
+                      <span className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-md text-pink-600 dark:text-pink-400 text-[10px] font-bold px-2 py-1 rounded flex items-center gap-1 shadow-sm border border-white/20 dark:border-slate-700/30">
                         <ImagePlus className="w-3 h-3" /> G-Photo
                       </span>
                     </div>
@@ -171,17 +174,17 @@ export default function AdminGalleryPage() {
               </div>
               <div className="p-4">
                 <div className="flex items-center justify-between mb-1 gap-2">
-                  <h3 className="font-bold text-slate-800 line-clamp-1">{item.title || 'Sarlavhasiz'}</h3>
-                  <div className="flex gap-2 shrink-0">
-                    <span className="text-[10px] uppercase tracking-wider bg-orange-100 text-orange-700 px-2 py-1 rounded-md font-bold">{item.course}-Kurs</span>
-                    {(item.media_type === 'google_photos' || item.media_type === 'google_photos_photo') && <span className="text-[10px] uppercase tracking-wider bg-blue-100 text-blue-700 px-2 py-1 rounded-md font-bold shrink-0">{item.media_type === 'google_photos' ? 'Albom' : 'Rasm'}</span>}
-                    {item.media_type === 'video' && <span className="text-[10px] uppercase tracking-wider bg-purple-100 text-purple-700 px-2 py-1 rounded-md font-bold flex items-center gap-1 shrink-0"><Film className="w-3 h-3"/> Video</span>}
+                  <h3 className="font-bold text-slate-800 dark:text-slate-200 line-clamp-1">{item.title || 'Sarlavhasiz'}</h3>
+                  <div className="flex gap-1.5 shrink-0">
+                    <span className="text-[9px] uppercase tracking-wider bg-orange-100 dark:bg-orange-950/40 text-orange-700 dark:text-orange-400 px-2 py-1 rounded-md font-bold">{item.course}-Kurs</span>
+                    {(item.media_type === 'google_photos' || item.media_type === 'google_photos_photo') && <span className="text-[9px] uppercase tracking-wider bg-blue-100 dark:bg-blue-950/40 text-blue-700 dark:text-blue-400 px-2 py-1 rounded-md font-bold shrink-0">{item.media_type === 'google_photos' ? 'Albom' : 'Rasm'}</span>}
+                    {item.media_type === 'video' && <span className="text-[9px] uppercase tracking-wider bg-purple-100 dark:bg-purple-950/40 text-purple-700 dark:text-purple-400 px-2 py-1 rounded-md font-bold flex items-center gap-1 shrink-0"><Film className="w-2.5 h-2.5"/> Video</span>}
                   </div>
                 </div>
-                {item.description && <p className="text-sm text-slate-500 line-clamp-2 mt-1">{item.description}</p>}
+                {item.description && <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mt-1">{item.description}</p>}
                 
                 {(item.media_type === 'google_photos' || item.media_type === 'google_photos_photo') && (
-                  <a href={item.media_url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs text-blue-600 mt-3 font-medium hover:underline bg-blue-50 px-3 py-1.5 rounded-lg">
+                  <a href={item.media_url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-xs text-blue-600 dark:text-blue-450 mt-3 font-semibold hover:underline bg-blue-50 dark:bg-blue-950/30 px-3 py-1.5 rounded-lg transition-colors">
                     {item.media_type === 'google_photos' ? 'Albomni ochish' : 'Rasmni ochish'} <LinkIcon className="w-3 h-3" />
                   </a>
                 )}
@@ -189,7 +192,7 @@ export default function AdminGalleryPage() {
             </div>
           ))}
           {items.length === 0 && (
-            <div className="col-span-full p-12 text-center text-slate-500 bg-white rounded-xl border border-dashed border-slate-300">
+            <div className="col-span-full p-12 text-center text-slate-500 dark:text-slate-450 bg-white dark:bg-slate-900 rounded-2xl border border-dashed border-slate-300 dark:border-slate-800">
               Hali rasmlar yoki albomlar qo'shilmagan
             </div>
           )}
