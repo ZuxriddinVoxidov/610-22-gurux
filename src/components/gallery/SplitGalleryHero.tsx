@@ -19,8 +19,8 @@ export default function SplitGalleryHero({ items }: { items: GalleryItem[] }) {
   if (images.length === 0) return null;
 
   return (
-    <div className="w-full flex flex-col lg:flex-row items-center justify-between px-4 sm:px-8 lg:px-16 pt-20 pb-12 lg:pt-28 lg:pb-16 bg-[#0f172a] gap-8 lg:gap-12">
-      <div className="w-full lg:w-1/2 z-10 flex flex-col justify-center">
+    <div className="w-full flex flex-col lg:flex-row items-center justify-between px-4 sm:px-8 lg:px-16 pt-12 pb-12 lg:pt-16 lg:pb-16 bg-[#0f172a] gap-8 lg:gap-12">
+      <div className="w-full lg:w-1/2 z-10 flex flex-col justify-start pt-4 lg:pt-12">
          <motion.h1 
            initial={{ opacity: 0, y: 30 }}
            animate={{ opacity: 1, y: 0 }}

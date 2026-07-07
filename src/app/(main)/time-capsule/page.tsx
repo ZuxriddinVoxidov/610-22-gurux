@@ -156,7 +156,7 @@ export default function TimeCapsulePage() {
       </AnimatePresence>
 
       {/* ── Qora overlay ── */}
-      <div className="absolute inset-0 bg-black/70 backdrop-blur-[2px]" />
+      <div className="absolute inset-0 bg-black/45" />
 
       {/* ── Markaziy kontent ── */}
       <div className="relative z-10 flex flex-col items-center gap-8 px-4 text-center">
@@ -196,18 +196,22 @@ export default function TimeCapsulePage() {
         )}
 
         {/* Taggi matn */}
-        {graduationDate && (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-            className="text-white/30 text-xs sm:text-sm font-medium"
-          >
-            Bitiruv sanasi: {graduationDate.toLocaleDateString("uz-UZ", {
-              year: "numeric", month: "long", day: "numeric"
-            })}
-          </motion.p>
-        )}
+        {graduationDate && (() => {
+          const dd = String(graduationDate.getDate()).padStart(2, '0');
+          const mm = String(graduationDate.getMonth() + 1).padStart(2, '0');
+          const yyyy = graduationDate.getFullYear();
+          const formattedDate = `${dd}.${mm}.${yyyy}`;
+          return (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
+              className="text-white/35 text-xs sm:text-sm font-bold"
+            >
+              Bitiruv sanasi: {formattedDate}
+            </motion.p>
+          );
+        })()}
       </div>
     </div>
   );
