@@ -127,15 +127,15 @@ export default function GalleryPage() {
   });
 
   return (
-    <main className="min-h-screen bg-[#050505]">
+    <main className="min-h-screen bg-white dark:bg-[#050505] transition-colors">
       {/* Split Hero (Kononenko Inspired) */}
       <SplitGalleryHero items={items} />
 
       {/* Aceternity UI Timeline */}
       {items.length === 0 ? (
         <div className="max-w-7xl mx-auto px-4 py-32 text-center">
-          <div className="py-20 bg-slate-900/50 rounded-3xl border border-slate-800 shadow-sm backdrop-blur-sm">
-            <p className="text-xl text-slate-400">Hozircha xotiralar yuklanmagan 📸</p>
+          <div className="py-20 bg-slate-50 dark:bg-slate-900/50 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm backdrop-blur-sm">
+            <p className="text-xl text-slate-550 dark:text-slate-400">Hozircha xotiralar yuklanmagan 📸</p>
           </div>
         </div>
       ) : (

@@ -80,7 +80,7 @@ function TimeBoxCompact({ value, label }: { value: number; label: string }) {
   const display = String(value).padStart(2, "0");
   return (
     <div className="flex flex-col items-center gap-0.5">
-      <span className="text-[8px] font-semibold uppercase tracking-wider text-slate-400 leading-none">{label}</span>
+      <span className="text-[8px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 leading-none">{label}</span>
       <AnimatePresence mode="wait">
         <motion.span
           key={display}
@@ -88,7 +88,7 @@ function TimeBoxCompact({ value, label }: { value: number; label: string }) {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 4, opacity: 0 }}
           transition={{ duration: 0.15 }}
-          className="text-white font-black text-sm leading-none bg-white/10 rounded-md px-1.5 py-1 min-w-[26px] text-center"
+          className="text-slate-800 dark:text-white font-black text-sm leading-none bg-slate-200/50 dark:bg-white/10 rounded-md px-1.5 py-1 min-w-[26px] text-center"
         >
           {display}
         </motion.span>
@@ -139,19 +139,19 @@ export default function BirthdayTimer({ birthDate, compact = false }: Props) {
   // ── COMPACT (karta uchun) ──────────────────────────────────────────
   if (compact) {
     return (
-      <div className="mt-3 rounded-xl border border-white/10 bg-slate-900/70 backdrop-blur-sm px-3 py-2.5">
-        <p className="text-[9px] font-bold uppercase tracking-widest text-slate-500 mb-2 text-center">
+      <div className="mt-3 rounded-xl border border-slate-200/60 dark:border-white/10 bg-slate-100/70 dark:bg-slate-900/70 backdrop-blur-sm px-3 py-2.5">
+        <p className="text-[9px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-2 text-center">
           🎂 Tug'ilgan kunga
         </p>
         <div className="flex items-end justify-center gap-1">
           <TimeBoxCompact value={timeLeft.months} label="Oy" />
-          <span className="text-slate-500 font-bold text-sm pb-1">:</span>
+          <span className="text-slate-400 dark:text-slate-500 font-bold text-sm pb-1">:</span>
           <TimeBoxCompact value={timeLeft.days} label="Kun" />
-          <span className="text-slate-500 font-bold text-sm pb-1">:</span>
+          <span className="text-slate-400 dark:text-slate-500 font-bold text-sm pb-1">:</span>
           <TimeBoxCompact value={timeLeft.hours} label="Soat" />
-          <span className="text-slate-500 font-bold text-sm pb-1">:</span>
+          <span className="text-slate-400 dark:text-slate-500 font-bold text-sm pb-1">:</span>
           <TimeBoxCompact value={timeLeft.minutes} label="Daqiqa" />
-          <span className="text-slate-500 font-bold text-sm pb-1">:</span>
+          <span className="text-slate-400 dark:text-slate-500 font-bold text-sm pb-1">:</span>
           <TimeBoxCompact value={timeLeft.seconds} label="Soniya" />
         </div>
       </div>
@@ -171,12 +171,12 @@ export default function BirthdayTimer({ birthDate, compact = false }: Props) {
   const formattedBirthDate = birthDate ? birthDate.replaceAll("-", ".") : "";
 
   return (
-    <div className="mt-5 rounded-2xl border border-slate-700 bg-slate-900/50 p-4">
+    <div className="mt-5 rounded-2xl border border-slate-200 dark:border-slate-750 bg-slate-50 dark:bg-slate-900/50 p-4">
       <div className="flex flex-col items-center mb-3">
-        <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+        <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">
           🎂 Tug'ilgan kunga qoldi
         </p>
-        <p className="text-sm font-semibold text-pink-400 mt-1">
+        <p className="text-sm font-bold text-pink-600 dark:text-pink-400 mt-1">
           {formattedBirthDate}
         </p>
       </div>
@@ -185,7 +185,7 @@ export default function BirthdayTimer({ birthDate, compact = false }: Props) {
           <div key={u.label} className="flex items-end gap-1.5">
             <TimeBox value={u.value} label={u.label} color={u.color} />
             {i < units.length - 1 && (
-              <span className="text-slate-500 font-black text-lg pb-2 leading-none select-none">:</span>
+              <span className="text-slate-400 dark:text-slate-500 font-black text-lg pb-2 leading-none select-none">:</span>
             )}
           </div>
         ))}

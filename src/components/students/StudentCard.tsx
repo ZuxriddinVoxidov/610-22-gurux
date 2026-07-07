@@ -71,7 +71,7 @@ export default function StudentCard({ student, onClick }: Props) {
         </motion.h3>
 
         {student.address && (
-          <p className="text-xs text-slate-400 dark:text-slate-500 mt-1.5 truncate max-w-full px-1">
+          <p className="text-xs text-slate-500 dark:text-slate-450 mt-1.5 truncate max-w-full px-1">
             {student.address}
           </p>
         )}
@@ -79,7 +79,7 @@ export default function StudentCard({ student, onClick }: Props) {
 
       {/* Ijtimoiy tarmoqlar */}
       {(student.social_links?.telegram || student.social_links?.instagram || student.social_links?.linkedin) && (
-        <div className="flex gap-3 mt-3 text-slate-400">
+        <div className="flex gap-3 mt-3 text-slate-400 dark:text-slate-500">
           {student.social_links?.telegram && (
             <Send className="w-3.5 h-3.5 hover:text-blue-500 transition-colors" />
           )}
