@@ -24,7 +24,16 @@ export default function StudentsPage() {
         .order('first_name', { ascending: true });
         
       if (!error && data) {
-        setStudents(data);
+        const sortedData = [...data];
+        const zIndex = sortedData.findIndex(
+          s => s.first_name.trim().toLowerCase().includes("zuxriddin") ||
+               s.last_name.trim().toLowerCase().includes("zuxriddin")
+        );
+        if (zIndex > -1) {
+          const [zuxriddin] = sortedData.splice(zIndex, 1);
+          sortedData.unshift(zuxriddin);
+        }
+        setStudents(sortedData);
       }
       setLoading(false);
     };
